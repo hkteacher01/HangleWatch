@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<style type="text/css">
+
+	body{
+		color: black;
+	}
+
+	span {
+		font-size: 50px;
+		padding: 20px;
+		color: gray;
+	}
+	
+	#numWatch{
+		font-size: 50px;
+		font-weight: bold;
+		padding: 20px;
+		color: black;
+	}
+	
+	p{
+		font-weight: bold;
+		font-size: 30px;
+	}
+
+</style>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+<script type="text/javascript">
+
+	$(function(){
+		setInterval(function(){
+			var d = new Date();
+			
+			
+			var h = d.getHours();
+			var m = d.getMinutes();
+			
+			if(h>12){
+				h=h-12;
+			}
+			
+			colorWatch(h,m);
+			
+			$("div span").each(function(){
+				if($(this).css("color") == "rgb(255, 0, 0)"){
+					$(this).css("font-weight","bold");
+				}
+			});
+
+			if(m > 49 && m <= 59){
+				$("#classTime").html("<p style='color:red'>쉬는시간 입니다.</p>");
+				$("body").css("background","skyblue");
+			}else{
+				$("#classTime").html("<p style='color:black'>수업시간 입니다.</p>");
+				$("body").css("background","white");
+			}
+
+
+			numWatch(d);
+		},1000);
+
+		function numWatch(d){
+			var h = d.getHours();
+			var m = d.getMinutes();
+			var s = d.getSeconds();
+			var str = "<span id='numWatch'> [숫자]  " + h +" : " + m + " : " + s + "</span>";
+
+			$("#watchDiv").html(str);
+		}
+		
+		function colorWatch(h,m){
+			$("div span").css("color","gray");
+			$("div span").css("font-weight","normal");
+			
+			$("div span:eq(14)").css("color","red");
+		
+			if(h==0){
+				$("div span:eq(0)").css("color","red");
+				$("div span:eq(5)").css("color","red");
+				$("div span:eq(15)").css("color","red");
+				$("div span:eq(16)").css("color","red");
+			}
+			
+			switch(h%12){
+			case 0:
+				$("div span:eq(0)").css("color","red");
+				$("div span:eq(5)").css("color","red");
+					break;
+			case 1:
+				$("div span:eq(1)").css("color","red");
+				break;
+			case 2:
+				$("div span:eq(5)").css("color","red");
+				break;
+			case 3:
+				$("div span:eq(3)").css("color","red");
+				break;
+			case 4:
+				$("div span:eq(4)").css("color","red");
+				break;
+			case 5:
+				$("div span:eq(2)").css("color","red");
+				$("div span:eq(7)").css("color","red");
+				break;
+			case 6:
+				$("div span:eq(6)").css("color","red");
+				$("div span:eq(7)").css("color","red");
+				break;
+			case 7:
+				$("div span:eq(8)").css("color","red");
+				$("div span:eq(9)").css("color","red");
+				break;
+			case 8:
+				$("div span:eq(10)").css("color","red");
+				$("div span:eq(11)").css("color","red");
+				break;
+			case 9:
+				$("div span:eq(12)").css("color","red");
+				$("div span:eq(13)").css("color","red");
+				break;
+			case 10:
+				$("div span:eq(0)").css("color","red");
+				break;
+			case 11:
+				$("div span:eq(0)").css("color","red");
+				$("div span:eq(1)").css("color","red");
+				break;
+			}
+			
+			switch(parseInt(m/10)){
+			case 0:
+				break;
+			case 1:
+				$("div span:eq(19)").css("color","red");
+				$("div span:eq(24)").css("color","red");
+				break;
+			case 2:
+				$("div span:eq(17)").css("color","red");
+				$("div span:eq(19)").css("color","red");
+				$("div span:eq(24)").css("color","red");
+				break;
+			case 3:
+				$("div span:eq(18)").css("color","red");
+				$("div span:eq(19)").css("color","red");
+				$("div span:eq(24)").css("color","red");
+				break;
+			case 4:
+				$("div span:eq(20)").css("color","red");
+				$("div span:eq(22)").css("color","red");
+				$("div span:eq(24)").css("color","red");
+				break;
+			case 5:
+				$("div span:eq(21)").css("color","red");
+				$("div span:eq(22)").css("color","red");
+				$("div span:eq(24)").css("color","red");
+				break;
+			}
+			
+			if(m%10 > 4){
+				$("div span:eq(23)").css("color","red");
+				$("div span:eq(24)").css("color","red");
+			}
+		}
+		
+	});
+
+</script>
+
+</head>
+<body>
+	<div id="classTime" align="center">
+	</div>
+	<div align="center">
+		<span>열</span><span>한</span><span>다</span><span>세</span><span>네</span><br/>
+		<span>두</span><span>여</span><span>섯</span><span>일</span><span>곱</span><br/>
+		<span>여</span><span>덟</span><span>아</span><span>홉</span><span>시</span><br/>
+		<span>자</span><span>정</span><span>이</span><span>삼</span><span>십</span><br/>
+		<span>사</span><span>오</span><span>십</span><span>오</span><span>분</span>
+		<div id="watchDiv"></div>
+	</div>
+</body>
+</html>
